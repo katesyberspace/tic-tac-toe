@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+}
+
+.row div {
+  border: 1px solid black;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+
+.player1 {
+  background-image: url(images/ice-cream.png);
+  background-repeat: no-repeat;
+  background-position: center;
+
+
+}
+
+.player2 {
+  background-image: url(images/pineapple.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
