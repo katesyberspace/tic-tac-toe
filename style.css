@@ -2,6 +2,32 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0 20%;
+}
+
+header {
+  height: 10vh;
+  margin-bottom: 4vh;
+}
+
+h1 {
+  font-family: 'Nico Moji', cursive;
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 1em;
+  margin-top: 0;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.winner-output {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: .9em;
+}
+
 .row {
   display: flex;
   width: 60vw;
@@ -18,15 +44,15 @@
 
 
 .player1 {
-  background-image: url(images/ice-cream.png);
+  background-image: url(images/katana.png);
   background-repeat: no-repeat;
   background-position: center;
-
-
+  background-size: 80%;
 }
 
 .player2 {
-  background-image: url(images/pineapple.png);
+  background-image: url(images/koi.png);
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 80%;
 }

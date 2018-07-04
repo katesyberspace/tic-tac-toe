@@ -2,7 +2,7 @@ var board = document.querySelector(".board");
 var rows = document.querySelectorAll(".row");
 var boxes = document.querySelectorAll(".row div");
 var turnCount = 0;
-var winnerOutput = document.querySelector(".winner");
+var winnerOutput = document.querySelector(".winner-output");
 var winnerFound = false;
 
 var checkRow = function(boxClass){
