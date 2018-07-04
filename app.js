@@ -1,73 +1,80 @@
 var board = document.querySelector(".board");
-var row = document.querySelectorAll(".row");
+var rows = document.querySelectorAll(".row");
 var boxes = document.querySelectorAll(".row div");
 var turnCount = 0;
 
-var checkWinner = function(){
-  //top row
-    if ((boxes[0].className === boxes[1].className) && (boxes[0].className === boxes[2].className) ){
-      console.log(boxes[0].className + " is the winner")
+var checkRow = function(boxClass){
+  rows.forEach(function(row){
+    var marksToWin = 0;
+    for (var x = 0; x < rows.length; x++){
+      if (row.children[x].classList.contains(boxClass) === true){
+        marksToWin += 1;
       }
-    //second row
-    else if ((boxes[3].className === boxes[4].className) && (boxes[3].className === boxes[5].className) ){
-      console.log(boxes[3].className + " is the winner")
+      if (marksToWin === rows.length){
+      console.log(boxClass);  
+      return
+      }
     }
-  
-    //third row
-    else if ((boxes[6].className === boxes[7].className) && (boxes[6].className === boxes[8].className) ){
-      console.log(boxes[6].className + " is the winner")
-    }
-  
-    //first columm
-    else if ((boxes[0].className === boxes[3].className) && (boxes[0].className === boxes[6].className) ){
-      console.log(boxes[0].className + " is the winner")
-    }
-  
-    //second column
-    else if ((boxes[1].className === boxes[4].className) && (boxes[1].className === boxes[7].className) ){
-      console.log(boxes[1].className + " is the winner")
-    }
-    //third column
-  
-    else if ((boxes[2].className === boxes[5].className) && (boxes[2].className === boxes[8].className) ){
-      console.log(boxes[2].className + " is the winner")
-    }
-  
-    //diagonal1
-    else if ((boxes[0].className === boxes[4].className) && (boxes[0].className === boxes[8].className) ){
-      console.log(boxes[0].className + " is the winner")
-    }
-  
-    //diagonal2
-    else if ((boxes[2].className === boxes[4].className) && (boxes[2].className === boxes[6].className) ){
-      console.log(boxes[0].className + " is the winner")
+  })
+}
+
+var checkCol = function(boxClass){
+  for (var x = 0; x < rows.length; x ++){
+    var marksToWin = 0;
+    rows.forEach(function(row){
+      if (row.children[x].classList.contains(boxClass) === true){
+      marksToWin += 1;
+      }
+      if (marksToWin === rows.length){
+        console.log(boxClass); 
+      }
+    })
   }
-  }
+}
 
 
 
+
+
+// var checkRow = function(boxClass){
+  // // if(((row[0].children[0].className === boxClass) && (row[0].children[1].className === boxClass) && row[0].children[2].className === boxClass)){
+    // console.log(boxClass)
+  // }
+// }
+
+
+
+  // if (((boxes[0].className === boxClass) && boxes[1].className === boxClass) && boxes[2].className === boxClass){
+    // console.log(boxClass + " is the winner");
+  // }
+
+
+
+
+  
 var markBox = function(event){
-  debugger
   if (event.target.classList != 0){
     return
   }
   else{ 
     if (turnCount % 2 === 0){
       event.target.classList.add("player1");
+      checkRow("player1");
+      checkCol("player1");
     }
     else {
       event.target.classList.add("player2")
+      checkRow("player2");
+      checkCol("player2")
     }  
     turnCount += 1
   }
-  checkWinner();
 }
 
+
+
+
 board.addEventListener("click", markBox); 
-
-
-
-
 
 
 
