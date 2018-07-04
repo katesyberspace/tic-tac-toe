@@ -19,11 +19,11 @@ var checkRow = function(boxClass){
 }
 
 var checkCol = function(boxClass){
-  for (var x = 0; x < rows.length; x ++){
+  for (var x = 0; x < rows.length; x++){
     var marksToWin = 0;
     rows.forEach(function(row){
       if (row.children[x].classList.contains(boxClass) === true){
-      marksToWin += 1;
+        marksToWin += 1;
       }
       if (marksToWin === rows.length){
         console.log(boxClass); 
@@ -32,26 +32,30 @@ var checkCol = function(boxClass){
   }
 }
 
+var checkRightDiagonal = function(boxClass){
+  var marksToWin = 0;
+  for (var i = 0; i < rows.length; i++){
+    if (rows[i].children[i].classList.contains(boxClass) === true){
+      marksToWin += 1;
+    }
+    if (marksToWin === rows.length){
+      console.log(boxClass); 
+    }
+  }
+}
 
+var checkLeftDiagonal = function(boxClass){
+  var marksToWin = 0;
+  for (var x = 0; x < rows.length; x++){
+      if (rows[x].children[rows.length-1-x].classList.contains(boxClass) === true){
+        marksToWin += 1;
+      }
+      if (marksToWin === rows.length){
+        console.log(boxClass); 
+      }
+  }
+}
 
-
-
-// var checkRow = function(boxClass){
-  // // if(((row[0].children[0].className === boxClass) && (row[0].children[1].className === boxClass) && row[0].children[2].className === boxClass)){
-    // console.log(boxClass)
-  // }
-// }
-
-
-
-  // if (((boxes[0].className === boxClass) && boxes[1].className === boxClass) && boxes[2].className === boxClass){
-    // console.log(boxClass + " is the winner");
-  // }
-
-
-
-
-  
 var markBox = function(event){
   if (event.target.classList != 0){
     return
@@ -61,17 +65,19 @@ var markBox = function(event){
       event.target.classList.add("player1");
       checkRow("player1");
       checkCol("player1");
+      checkRightDiagonal("player1");
+      checkLeftDiagonal("player1");
     }
     else {
       event.target.classList.add("player2")
       checkRow("player2");
-      checkCol("player2")
+      checkCol("player2");
+      checkRightDiagonal("player2");
+      checkLeftDiagonal("player2");
     }  
     turnCount += 1
   }
 }
-
-
 
 
 board.addEventListener("click", markBox); 
