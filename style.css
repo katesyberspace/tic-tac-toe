@@ -56,3 +56,28 @@ h2 {
   background-position: center;
   background-size: 80%;
 }
+
+
+@media (min-width: 800px) {
+  h1 {
+
+  }
+
+  h2 {
+
+  }
+
+  .winner-output {
+
+  }
+
+  .row {
+    width: 30vw;
+    height: 10vw;
+  }
+
+  .row div{
+    width: 30vw;
+    height: 10vw;
+  }
+}
