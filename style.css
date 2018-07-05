@@ -18,7 +18,7 @@ main {
 h1 {
   font-family: 'Nico Moji', cursive;
   font-size: 4em;
-  margin-bottom: 5px;
+  margin-bottom: 0;
   color: #6b8ec7;
 }
 
@@ -49,6 +49,7 @@ h2 {
   height: 200px;
   text-align: center;
   background-color: #97b0d8;
+  transition: all 1s cubic-bezier(.48,.47,.23,.46);
 }
 
 row div:first-child {
@@ -95,7 +96,7 @@ footer {
 .fine-print {
   font-family: 'Montserrat Alternates', sans-serif;
   /* width: 600px; */
-  margin: 6vh 0 0 0;
+  margin-top: 6vh;
   text-align: left;
   color: #a3b9dc;
 }
@@ -130,6 +131,7 @@ a {
 
   .winner-output {
     font-size: .8em;
+    margin-top: 3px;
   }
 
   .row {
@@ -149,5 +151,6 @@ a {
 
   .fine-print {
     font-size: .8em;
+    margin-top: 3vh;
   }
 }
