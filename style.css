@@ -57,6 +57,10 @@ h2 {
   background-size: 80%;
 }
 
+.highlight {
+  background-color: yellow;
+}
+
 
 @media (min-width: 800px) {
   h1 {

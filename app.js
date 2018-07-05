@@ -8,73 +8,82 @@ var matchingBoxes = [];
 var winningBoxes = [];
 
 
-
 var getWinningBoxes = function(){
   matchingBoxes.forEach(function(box){
     winningBoxes.push(box);
   })
 }
 
+var declareWinner = function(boxClass){
+  if (boxClass === "player1"){
+    winnerOutput.textContent = "player one wins! click any box to start new game."
+  }
+  else if (boxClass === "player2"){
+    winnerOutput.textContent = "player two wins! click any box to start new game."
+  }
+}
+
+var checkForWin = function(numMarksInLine, boxClass){
+  if (numMarksInLine === rows.length){
+    winnerFound = true;
+    declareWinner(boxClass);
+    getWinningBoxes();
+  }
+}
+
 var checkRow = function(boxClass){
   rows.forEach(function(row){
     var numMarksInLine = 0;
+    matchingBoxes = [];
     for (var col = 0; col < rows.length; col++){
       if (row.children[col].classList.contains(boxClass) === true){
         numMarksInLine += 1;
         matchingBoxes.push(row.children[col]);
       }
-      if (numMarksInLine === rows.length){
-        winnerFound = true;
-        getWinningBoxes();
-        //maybe take the winnerOutput out of this function and put in the markBox function. might need a global variable, winning class
-        // winnerOutput.textContent = "game over " + boxClass + " wins!";  
-      }
+      checkForWin(numMarksInLine, boxClass);
     }
   })
 } 
 
 var checkCol = function(boxClass){
-  for (var x = 0; x < rows.length; x++){
+  for (var col = 0; col < rows.length; col++){
     var numMarksInLine = 0;
+    matchingBoxes = [];
     rows.forEach(function(row){
-      if (row.children[x].classList.contains(boxClass) === true){
+      if (row.children[col].classList.contains(boxClass) === true){
         numMarksInLine += 1;
+        matchingBoxes.push(row.children[col]);
       }
-      if (numMarksInLine === rows.length){
-        winnerFound = true;
-        winnerOutput.textContent = "game over " + boxClass + " wins!"; 
-      }
+      checkForWin(numMarksInLine, boxClass);
     })
   }
 }
 
 var checkRightDiagonal = function(boxClass){
   var numMarksInLine = 0;
-  for (var i = 0; i < rows.length; i++){
-    if (rows[i].children[i].classList.contains(boxClass) === true){
+  matchingBoxes = [];
+  for (var index = 0; index < rows.length; index++){
+    if (rows[index].children[index].classList.contains(boxClass) === true){
       numMarksInLine += 1;
+      matchingBoxes.push(rows[index].children[index]);
     }
-    if (numMarksInLine === rows.length){
-      winnerFound = true;
-      winnerOutput.textContent = "game over " + boxClass + " wins!"; 
-    }
+    checkForWin(numMarksInLine, boxClass);
   }
 }
 
 var checkLeftDiagonal = function(boxClass){
   var numMarksInLine = 0;
-  for (var x = 0; x < rows.length; x++){
-      if (rows[x].children[rows.length-1-x].classList.contains(boxClass) === true){
-        numMarksInLine += 1;
-      }
-      if (numMarksInLine === rows.length){
-        winnerFound = true;
-        winnerOutput.textContent = "game over " + boxClass + " wins!";
-      }
+  matchingBoxes = [];
+  for (var index = 0; index < rows.length; index++){
+    if (rows[index].children[rows.length-1-index].classList.contains(boxClass) === true){
+      numMarksInLine += 1;
+      matchingBoxes.push(rows[index].children[rows.length-1-index]);
+    }
+    checkForWin(numMarksInLine, boxClass);  
   }
 }
 
-var checkForWinner = function(boxClass){
+var runWinLogic = function(boxClass){
   checkRow(boxClass);
   checkCol(boxClass);
   checkRightDiagonal(boxClass);
@@ -82,6 +91,10 @@ var checkForWinner = function(boxClass){
 }
 
 var markBox = function(event){
+  if (winnerFound === true){
+    resetGame();
+  }
+
   //stop players from clicking the same box twice - if box already has a style class return 
   if (event.target.classList != 0){
     return
@@ -90,34 +103,43 @@ var markBox = function(event){
   else{ 
     if (turnCount % 2 === 0){ 
       event.target.classList.add("player1");
-      checkForWinner("player1");
+      runWinLogic("player1");
     }
     else {
       event.target.classList.add("player2")
-      checkForWinner("player2");
+      runWinLogic("player2");
     }  
     turnCount += 1
   }
+  
   //if there is no winner by turn 8, winnerOutput to show "Draw"
   if (turnCount === 8 && winnerFound === false){
     winnerOutput.textContent = "game over - everybody wins";
-    //clear game board of all styles (eg icons)
-    boxes.forEach(function(box){
-      box.className = "";
-    })
-    //reset turn count
-    turnCount = 0;
+    setTimeout(resetGame, 4000);
   }
 
-  //if someone has won based on game status winnderFound = true 
   else if (winnerFound === true){
-    boxes.forEach(function(box){
-      box.className = "";
-    })
-    turnCount = 0;
-    winnerFound = false;
-    // winnerOutput.textContent = "";
+      showWinningBoxes();
   }
+}
+
+var resetGame = function(){
+  boxes.forEach(function(box){
+    box.className = "";
+  })
+  turnCount = 0;
+  winnerOutput.textContent = "";
+  winnerFound = false;
+  winningBoxes.forEach(function(box){
+    box.style.border="1px solid black";
+  })
+  winningBoxes = [];
+}
+
+var showWinningBoxes  = function(){
+  winningBoxes.forEach(function(box){
+    box.style.border="2px solid yellow";
+  })
 }
 
 board.addEventListener("click", markBox); 
