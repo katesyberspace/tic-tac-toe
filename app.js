@@ -12,15 +12,15 @@ var winningBoxes = [];
 var getWinningBoxes = function(){
   matchingBoxes.forEach(function(box){
     winningBoxes.push(box);
-  })
+  });
 }
 
 var declareWinner = function(boxClass){
   if (boxClass === "player1"){
-    winnerOutput.textContent = "player one wins!"
+    winnerOutput.textContent = "player one wins!";
   }
   else if (boxClass === "player2"){
-    winnerOutput.textContent = "player two wins!"
+    winnerOutput.textContent = "player two wins!";
   }
 }
 
@@ -91,58 +91,55 @@ var runWinLogic = function(boxClass){
   checkLeftDiagonal(boxClass);
 }
 
+var showWinningBoxes  = function(){
+  winningBoxes.forEach(function(box){
+    box.style.backgroundColor = "#f7dfa1";
+  })
+}
+
 var markBox = function(event){
   if (winnerFound === true){
     return
   }
-  //stop players from clicking the same box twice - if box already has a style class return 
   if (event.target.classList != 0){
     return
   }
-  //checking who's turn it is, based on even turns being player1 and odd turns being player2
+
   else{ 
     if (turnCount % 2 === 0){ 
       event.target.classList.add("player1");
       runWinLogic("player1");
     }
     else {
-      event.target.classList.add("player2")
+      event.target.classList.add("player2");
       runWinLogic("player2");
     }  
-    turnCount += 1
+    turnCount += 1;
   }
   
-  //if there is no winner by turn 8, winnerOutput to show "Draw"
   if (turnCount === 9 && winnerFound === false){
     winnerOutput.textContent = "game over - everybody wins";
   }
 
   else if (winnerFound === true){
-      showWinningBoxes();
+    showWinningBoxes();
   }
 }
+
+board.addEventListener("click", markBox); 
 
 var resetGame = function(){
   boxes.forEach(function(box){
     box.className = "";
-  })
+  });
   turnCount = 0;
   winnerOutput.textContent = "";
   winnerFound = false;
   winningBoxes.forEach(function(box){
     box.style.backgroundColor = "#97b0d8";
-  })
+  });
   winningBoxes = [];
 }
-
-var showWinningBoxes  = function(){
-  winningBoxes.forEach(function(box){
-    box.style.backgroundColor = "#f7dfa1";
-    // box.style.box-shadow = "10px 10px 8px #888888";
-  })
-}
-
-board.addEventListener("click", markBox); 
 
 resetBtn.addEventListener("click", resetGame);
 
