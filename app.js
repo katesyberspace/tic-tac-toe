@@ -2,6 +2,7 @@ var board = document.querySelector(".board");
 var rows = document.querySelectorAll(".row");
 var boxes = document.querySelectorAll(".row div");
 var winnerOutput = document.querySelector(".winner-output");
+var resetBtn = document.querySelector(".reset-btn");
 var winnerFound = false;
 var turnCount = 0;
 var matchingBoxes = [];
@@ -16,10 +17,10 @@ var getWinningBoxes = function(){
 
 var declareWinner = function(boxClass){
   if (boxClass === "player1"){
-    winnerOutput.textContent = "player one wins! click any box to start new game."
+    winnerOutput.textContent = "player one wins!"
   }
   else if (boxClass === "player2"){
-    winnerOutput.textContent = "player two wins! click any box to start new game."
+    winnerOutput.textContent = "player two wins!"
   }
 }
 
@@ -92,9 +93,8 @@ var runWinLogic = function(boxClass){
 
 var markBox = function(event){
   if (winnerFound === true){
-    resetGame();
+    return
   }
-
   //stop players from clicking the same box twice - if box already has a style class return 
   if (event.target.classList != 0){
     return
@@ -113,9 +113,8 @@ var markBox = function(event){
   }
   
   //if there is no winner by turn 8, winnerOutput to show "Draw"
-  if (turnCount === 8 && winnerFound === false){
+  if (turnCount === 9 && winnerFound === false){
     winnerOutput.textContent = "game over - everybody wins";
-    setTimeout(resetGame, 4000);
   }
 
   else if (winnerFound === true){
@@ -131,19 +130,21 @@ var resetGame = function(){
   winnerOutput.textContent = "";
   winnerFound = false;
   winningBoxes.forEach(function(box){
-    box.style.border="1px solid black";
+    box.style.backgroundColor = "#97b0d8";
   })
   winningBoxes = [];
 }
 
 var showWinningBoxes  = function(){
   winningBoxes.forEach(function(box){
-    box.style.border="2px solid yellow";
+    box.style.backgroundColor = "#f7dfa1";
+    // box.style.box-shadow = "10px 10px 8px #888888";
   })
 }
 
 board.addEventListener("click", markBox); 
 
+resetBtn.addEventListener("click", resetGame);
 
 
 
