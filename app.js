@@ -12,6 +12,17 @@ var matchingBoxes = [];
 var winningBoxes = [];
 var maxTurns = 9;
 
+var showTurn = function(turn){
+  turn = turnCount
+  if (turn %2 === 0){
+    winnerOutput.textContent = "player one, go!";
+  }
+  else {
+    winnerOutput.textContent = "player two, go!";
+  }
+}
+showTurn();
+
 var getWinningBoxes = function(){
   matchingBoxes.forEach(function(box){
     winningBoxes.push(box);
@@ -108,12 +119,13 @@ var markBox = function(event, totalTurns){
   if (winnerFound === true){
     return
   }
+
   if (event.target.classList != 0){
     return
   }
 
   else{ 
-    if (turnCount % 2 === 0){ 
+    if (turnCount % 2 === 0){
       event.target.classList.add("player1");
       runWinLogic("player1");
     }
@@ -132,6 +144,10 @@ var markBox = function(event, totalTurns){
   else if (winnerFound === true){
     showWinningBoxes();
   }
+
+  else {
+    showTurn();
+  }
 }
 
 board.addEventListener("click", markBox); 
@@ -142,7 +158,7 @@ var resetGame = function(){
     box.className = "";
   });
   turnCount = 0;
-  winnerOutput.textContent = "";
+  showTurn();
   winnerFound = false;
   winningBoxes.forEach(function(box){
     box.style.backgroundColor = "#97b0d8";
@@ -151,7 +167,6 @@ var resetGame = function(){
 }
 
 resetBtn.addEventListener("click", resetGame);
-
 
 var createNewRow = function(gridSize){
 	var newRow = document.createElement('div');

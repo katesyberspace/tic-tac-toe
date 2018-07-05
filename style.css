@@ -75,9 +75,9 @@ footer {
   border-radius: 25px;
   font-family: 'Montserrat Alternates', sans-serif;
   color: #ffffff;
-  font-size: 1.5em;
+  font-size: 90%;
   background: #6b8ec7;
-  padding: 10px 20px 10px 20px;
+  width: 10%;
   text-decoration: none;
   outline: none;
 }
@@ -128,7 +128,7 @@ a {
 
   .btn * {
     font-size: 1em;
-    padding: 5px 10px 5px 10px;
+    width: 53px;
     margin: 3px;        
   }
 
