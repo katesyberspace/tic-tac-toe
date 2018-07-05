@@ -1,6 +1,6 @@
-#ティック-タック-トウ
-##The Classic Tic-Tac-Toe Game with a Japanese Theme.
-###Take a break from your stressful day and enjoy the game.
+# ティック-タック-トウ
+## The Classic Tic-Tac-Toe Game with a Japanese Theme.
+### Take a break from your stressful day and enjoy the game.
 
 https://katesyberspace.github.io/tic-tac-toe/
 
@@ -21,6 +21,11 @@ If the boxes in the winning combination had the same css class style, each winni
 
 A reset button added below the gameboard so the game could be reset at any point in time.
 
+After the game was running on a static 3x3 grid, I wanted to make a way for the user to expand the grid.  I did this by creating a function to create a new row, with x number of boxes within the row (x being the size of the grid).  Then the create new row goes into a function called createdGrid, which runs the create new row function as many times as the grid size.
+
+The last thing to do was to create buttons representing the different grid size options.
+
+I comprimised the mobile responsiveness of the app to add the function for dynamic grid sizes. This is still an unsolved problem.
 
 
 

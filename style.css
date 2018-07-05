@@ -3,7 +3,9 @@
 }
 
 body {
+  width: 50%;
   margin: 0 20%;
+  text-align: center;
 }
 
 header {
@@ -38,22 +40,16 @@ h2 {
 
 .row {
   display: flex;
-  width: 600px;
-  height: 200px;
-  margin: 0 auto;
+  justify-content: center;
 }
 
 .row div {
   border: .5px solid white;
-  width: 600px;
-  height: 200px;
+  width: 120px;
+  height: 120px;
   text-align: center;
   background-color: #97b0d8;
-  transition: all 1s cubic-bezier(.48,.47,.23,.46);
-}
-
-row div:first-child {
-  border-radius: 10px 0 0 0;
+  transition: all 1s ease-out;
 }
 
 .player1 {
@@ -74,7 +70,7 @@ footer {
   text-align: center;
 }
 
-.reset-btn {
+.btn * {
   border: none;
   border-radius: 25px;
   font-family: 'Montserrat Alternates', sans-serif;
@@ -86,16 +82,15 @@ footer {
   outline: none;
 }
   
-.reset-btn:hover {
+.btn *:hover {
   background: #97d8d8;
   text-decoration: none;
 }
 
 .fine-print {
   font-family: 'Montserrat Alternates', sans-serif;
-  /* width: 600px; */
   margin-top: 6vh;
-  text-align: left;
+  text-align: center;
   color: #a3b9dc;
 }
 
@@ -110,7 +105,7 @@ a {
 
 @media (max-width: 850px) {
   body {
-    margin: 0 10%;
+    margin: 0 auto;
   }
 
   header {
@@ -131,19 +126,10 @@ a {
     margin-top: 3px;
   }
 
-  .row {
-    width: 60vw;
-    height: 20vw;
-  }
-
-  .row div{
-    width: 60vw;
-    height: 20vw;
-  }
-
-  .reset-btn {
+  .btn * {
     font-size: 1em;
-    padding: 5px 10px 5px 10px;        
+    padding: 5px 10px 5px 10px;
+    margin: 3px;        
   }
 
   .fine-print {

@@ -3,11 +3,14 @@ var rows = document.querySelectorAll(".row");
 var boxes = document.querySelectorAll(".row div");
 var winnerOutput = document.querySelector(".winner-output");
 var resetBtn = document.querySelector(".reset-btn");
+var grid3 = document.querySelector('.grid3');
+var grid4 = document.querySelector('.grid4');
+var grid5 = document.querySelector('.grid5');
 var winnerFound = false;
 var turnCount = 0;
 var matchingBoxes = [];
 var winningBoxes = [];
-
+var maxTurns = 9;
 
 var getWinningBoxes = function(){
   matchingBoxes.forEach(function(box){
@@ -33,6 +36,7 @@ var checkForWin = function(numMarksInLine, boxClass){
 }
 
 var checkRow = function(boxClass){
+  rows = document.querySelectorAll('.row');
   rows.forEach(function(row){
     var numMarksInLine = 0;
     matchingBoxes = [];
@@ -47,6 +51,7 @@ var checkRow = function(boxClass){
 } 
 
 var checkCol = function(boxClass){
+  rows = document.querySelectorAll('.row');
   for (var col = 0; col < rows.length; col++){
     var numMarksInLine = 0;
     matchingBoxes = [];
@@ -61,6 +66,7 @@ var checkCol = function(boxClass){
 }
 
 var checkRightDiagonal = function(boxClass){
+  rows = document.querySelectorAll('.row');
   var numMarksInLine = 0;
   matchingBoxes = [];
   for (var index = 0; index < rows.length; index++){
@@ -73,6 +79,7 @@ var checkRightDiagonal = function(boxClass){
 }
 
 var checkLeftDiagonal = function(boxClass){
+  rows = document.querySelectorAll('.row');
   var numMarksInLine = 0;
   matchingBoxes = [];
   for (var index = 0; index < rows.length; index++){
@@ -97,7 +104,7 @@ var showWinningBoxes  = function(){
   });
 }
 
-var markBox = function(event){
+var markBox = function(event, totalTurns){
   if (winnerFound === true){
     return
   }
@@ -117,7 +124,8 @@ var markBox = function(event){
     turnCount += 1;
   }
   
-  if (turnCount === 9 && winnerFound === false){
+  totalTurns = maxTurns;
+  if (turnCount === totalTurns && winnerFound === false){
     winnerOutput.textContent = "game over - everybody wins";
   }
 
@@ -129,6 +137,7 @@ var markBox = function(event){
 board.addEventListener("click", markBox); 
 
 var resetGame = function(){
+  boxes = document.querySelectorAll(".row div");
   boxes.forEach(function(box){
     box.className = "";
   });
@@ -137,11 +146,49 @@ var resetGame = function(){
   winnerFound = false;
   winningBoxes.forEach(function(box){
     box.style.backgroundColor = "#97b0d8";
-  });
+  });   
   winningBoxes = [];
 }
 
 resetBtn.addEventListener("click", resetGame);
 
 
+var createNewRow = function(gridSize){
+	var newRow = document.createElement('div');
+  newRow.classList.add('row');
+	for (var i = 0; i < gridSize; i++){
+    var newCol = document.createElement('div');
+		newCol.style.border = ".5px solid white";
+    newCol.style.width = "120px";
+    newCol.style.height = "120px";
+    newCol.style.backgroundColor = "#97b0d8";
+		newRow.appendChild(newCol);
+  }
+  board.appendChild(newRow);
+  document.querySelector("body").style.textAlign = "center";
+}
 
+var clearBoard = function(){
+  board.innerHTML = ""
+}
+
+var makeGrid = function (gridSize){
+  resetGame();
+  maxTurns = Math.pow(gridSize, 2);
+  clearBoard();
+  for (var i = 0; i < gridSize; i++){
+    	createNewRow(gridSize);
+  }
+}
+
+grid3.addEventListener("click", function(){
+  makeGrid(3);
+})
+
+grid4.addEventListener("click", function(){
+  makeGrid(4);
+})
+
+grid5.addEventListener("click", function(){
+  makeGrid(5);
+})
