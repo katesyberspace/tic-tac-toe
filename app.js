@@ -43,7 +43,7 @@ var checkRow = function(boxClass){
       }
       checkForWin(numMarksInLine, boxClass);
     }
-  })
+  });
 } 
 
 var checkCol = function(boxClass){
@@ -56,7 +56,7 @@ var checkCol = function(boxClass){
         matchingBoxes.push(row.children[col]);
       }
       checkForWin(numMarksInLine, boxClass);
-    })
+    });
   }
 }
 
@@ -94,7 +94,7 @@ var runWinLogic = function(boxClass){
 var showWinningBoxes  = function(){
   winningBoxes.forEach(function(box){
     box.style.backgroundColor = "#f7dfa1";
-  })
+  });
 }
 
 var markBox = function(event){
