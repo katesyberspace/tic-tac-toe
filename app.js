@@ -116,7 +116,7 @@ var showWinningBoxes  = function(){
   });
 }
 
-var markBox = function(event, totalTurns){
+var markBox = function(event){
   if (winnerFound === true){
     return
   }
@@ -137,8 +137,7 @@ var markBox = function(event, totalTurns){
     turnCount += 1;
   }
   
-  totalTurns = maxTurns;
-  if (turnCount === totalTurns && winnerFound === false){
+  if (turnCount === maxTurns && winnerFound === false){
     outputBox.textContent = "game over - everybody wins";
   }
 
