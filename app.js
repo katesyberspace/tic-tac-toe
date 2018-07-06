@@ -199,12 +199,12 @@ var makeGrid = function (gridSize){
 
 grid3.addEventListener("click", function(){
   makeGrid(3);
-})
+});
 
 grid4.addEventListener("click", function(){
   makeGrid(4);
-})
+});
 
 grid5.addEventListener("click", function(){
   makeGrid(5);
-})
+});
