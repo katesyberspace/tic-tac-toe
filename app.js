@@ -1,13 +1,14 @@
 var board = document.querySelector(".board");
 var rows = document.querySelectorAll(".row");
 var boxes = document.querySelectorAll(".row div");
-var winnerOutput = document.querySelector(".winner-output");
+var outputBox = document.querySelector(".output-box");
 var resetBtn = document.querySelector(".reset-btn");
 var grid3 = document.querySelector('.grid3');
 var grid4 = document.querySelector('.grid4');
 var grid5 = document.querySelector('.grid5');
 var winnerFound = false;
 var turnCount = 0;
+var numMarksInLine = 0;
 var matchingBoxes = [];
 var winningBoxes = [];
 var maxTurns = 9;
@@ -15,10 +16,10 @@ var maxTurns = 9;
 var showTurn = function(turn){
   turn = turnCount
   if (turn %2 === 0){
-    winnerOutput.textContent = "player one, go!";
+    outputBox.textContent = "player one, go!";
   }
   else {
-    winnerOutput.textContent = "player two, go!";
+    outputBox.textContent = "player two, go!";
   }
 }
 showTurn();
@@ -31,10 +32,10 @@ var getWinningBoxes = function(){
 
 var declareWinner = function(boxClass){
   if (boxClass === "player1"){
-    winnerOutput.textContent = "player one wins!";
+    outputBox.textContent = "player one wins!";
   }
   else if (boxClass === "player2"){
-    winnerOutput.textContent = "player two wins!";
+    outputBox.textContent = "player two wins!";
   }
 }
 
@@ -49,7 +50,7 @@ var checkForWin = function(numMarksInLine, boxClass){
 var checkRow = function(boxClass){
   rows = document.querySelectorAll('.row');
   rows.forEach(function(row){
-    var numMarksInLine = 0;
+    numMarksInLine = 0;
     matchingBoxes = [];
     for (var col = 0; col < rows.length; col++){
       if (row.children[col].classList.contains(boxClass) === true){
@@ -64,7 +65,7 @@ var checkRow = function(boxClass){
 var checkCol = function(boxClass){
   rows = document.querySelectorAll('.row');
   for (var col = 0; col < rows.length; col++){
-    var numMarksInLine = 0;
+    numMarksInLine = 0;
     matchingBoxes = [];
     rows.forEach(function(row){
       if (row.children[col].classList.contains(boxClass) === true){
@@ -78,7 +79,7 @@ var checkCol = function(boxClass){
 
 var checkRightDiagonal = function(boxClass){
   rows = document.querySelectorAll('.row');
-  var numMarksInLine = 0;
+  numMarksInLine = 0;
   matchingBoxes = [];
   for (var index = 0; index < rows.length; index++){
     if (rows[index].children[index].classList.contains(boxClass) === true){
@@ -91,7 +92,7 @@ var checkRightDiagonal = function(boxClass){
 
 var checkLeftDiagonal = function(boxClass){
   rows = document.querySelectorAll('.row');
-  var numMarksInLine = 0;
+  numMarksInLine = 0;
   matchingBoxes = [];
   for (var index = 0; index < rows.length; index++){
     if (rows[index].children[rows.length-1-index].classList.contains(boxClass) === true){
@@ -138,7 +139,7 @@ var markBox = function(event, totalTurns){
   
   totalTurns = maxTurns;
   if (turnCount === totalTurns && winnerFound === false){
-    winnerOutput.textContent = "game over - everybody wins";
+    outputBox.textContent = "game over - everybody wins";
   }
 
   else if (winnerFound === true){
@@ -189,8 +190,8 @@ var clearBoard = function(){
 
 var makeGrid = function (gridSize){
   resetGame();
-  maxTurns = Math.pow(gridSize, 2);
   clearBoard();
+  maxTurns = Math.pow(gridSize, 2);
   for (var i = 0; i < gridSize; i++){
     	createNewRow(gridSize);
   }
