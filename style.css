@@ -49,7 +49,7 @@ h2 {
   height: 120px;
   text-align: center;
   background-color: #97b0d8;
-  transition: all 1s ease-out;
+  transition: all .5s ease-out;
 }
 
 .player1 {
@@ -95,7 +95,7 @@ footer {
 }
 
 #sy {
-  color: #4672b9;
+  color: #dca3dc;
 }
 
 a {
